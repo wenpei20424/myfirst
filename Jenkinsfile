@@ -3,7 +3,16 @@ pipeline {
   stages {
     stage('q') {
       steps {
-        echo '123'
+        parallel(
+          "q": {
+            echo '123'
+            
+          },
+          "svn": {
+            svn(url: 'svn://172.24.118.105/CMO', changelog: true)
+            
+          }
+        )
       }
     }
   }
